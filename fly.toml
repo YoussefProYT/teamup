@@ -1,0 +1,27 @@
+app = "teamup-livekit"
+primary_region = "fra"  # Frankfurt - أقرب لمصر
+
+[build]
+  image = "livekit/livekit-server:latest"
+
+[env]
+  LIVEKIT_CONFIG = "/etc/livekit.yaml"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 7880
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+[[services]]
+  protocol = "udp"
+  internal_port = 7882
+
+  [[services.ports]]
+    port = 7882
